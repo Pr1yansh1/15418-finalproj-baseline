@@ -1,6 +1,6 @@
 CXX = g++
-CXXFLAGS = -std=c++17 -Wall -pipe -fopenmp $(EXTRACXXFLAGS)
-LDFLAGS = -pthread -Wl,--no-as-needed $(CXXFLAGS) $(EXTRALDFLAGS)
+CXXFLAGS = -std=c++17 -Wall -pipe $(EXTRACXXFLAGS) -I/opt/homebrew/opt/libomp/include -Xclang -fopenmp
+LDFLAGS = -pthread $(CXXFLAGS) $(EXTRALDFLAGS) -L/opt/homebrew/opt/libomp/lib -lomp
 
 OBJS = main.o search.o evaluation.o
 

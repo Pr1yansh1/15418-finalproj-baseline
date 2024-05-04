@@ -1,0 +1,23 @@
+uci
+id name LibchessEngine
+id author Manik Charan
+uciok
+ucinewgame
+position startpos moves e2e4 e7e5
+go 
+info score cp 35 depth 1 time 1 nodes 36 nps 36000 pv b1c3
+info score cp 0 depth 2 time 1 nodes 205 nps 205000 pv b1c3 b8c6
+info score cp 35 depth 3 time 2 nodes 1371 nps 685500 pv b1c3 b8c6 g1e2
+info score cp 0 depth 4 time 11 nodes 8624 nps 784000 pv b1c3 b8c6 g1e2 g8f6
+info score cp 40 depth 5 time 52 nodes 68916 nps 1325307 pv g1f3 g8f6 f1d3 d7d5 b1c3
+info score cp 5 depth 6 time 173 nodes 289552 nps 1673710 pv g1f3 f8d6 f1c4 g8e7 e1g1 e8g8
+info score cp 40 depth 7 time 555 nodes 1236799 nps 2228466 pv g1f3 f8d6 f1c4 g8e7 e1g1 e8g8 b1c3
+info score cp 9 depth 8 time 3487 nodes 7847985 nps 2250640 pv g1f3 g8f6 f1c4 f6e4 f3e5 d7d5 f2f3 d8h4
+info score cp 28 depth 9 time 11945 nodes 29403454 nps 2461570 pv g1f3 f8d6 b1c3 g8e7 d2d4 b8c6 c1e3 e5d4 f3d4
+info score cp 4 depth 10 time 69753 nodes 160900600 nps 2306719 pv g1f3 g8f6 f3e5 d7d6 e5f3 f6e4 b1c3 c8f5 f1d3 e4c3
+info score cp 28 depth 11 time 275806 nodes 674463894 nps 2445428 pv g1f3 b8c6 b1c3 f8d6 f1c4 g8f6 e1g1 e8g8 d2d4 d6b4 c3d5
+info score cp 14 depth 12 time 2195629 nodes 3389301135 nps 1543658 pv g1f3 b8c6 b1c3 g8f6 f1c4 f8b4 e1g1 e8g8 c3d5 b4c5 d2d3 f6d5
+info score cp 16 depth 13 time 7018446 nodes 13719294202 nps 1954748 pv g1f3 b8c6 b1c3 g8f6 f1c4 f8b4 e1g1 e8g8 f3g5 d8e7 a2a3 b4a5 c4f7
+info score cp 22 depth 14 time 33330071 nodes 70624480781 nps 2118941 pv g1f3 b8c6 b1c3 g8f6 f1c4 f8b4 e1g1 e8g8 f3g5 d8e7 d2d3 d7d6 c4f7 f8f7
+^Z
+[5]  + 28696 suspended  ./engine
