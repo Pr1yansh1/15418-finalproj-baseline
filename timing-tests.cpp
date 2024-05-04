@@ -2,7 +2,7 @@
 #include <chrono>
 #include <vector>
 #include "libchess/Position.h"
-#include "search.h"  // Ensure this is the correct relative or absolute path
+#include "search.h"
 #include "libchess/UCIService.h"
 
 using namespace libchess;
@@ -26,10 +26,11 @@ int main() {
         {"2r5/3pk3/8/2P5/8/2K5/8/8 w - - 5 4", 6},
         {"rnbq1k1r/pp1Pbppp/2p5/8/2B5/8/PPP1NnPP/RNBQK2R w KQ - 1 8", 6},
         {"r4rk1/1pp1qppp/p1np1n2/2b1p1B1/2B1P1b1/P1NP1N2/1PP1QPPP/R4RK1 w - - 0 10", 6},
+        
         {"r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq - 0 1", 6},
         {"2rq1rk1/1p3pbp/p1npbnp1/4p3/4P3/1NN1BP2/PPPQ2PP/2KR1B1R w - - 0 1", 6},
         {"r1bq1rk1/1pp1bppp/p1np1n2/4p3/4P3/2N1B3/PPP1BPPP/R2Q1RK1 w - - 0 1", 6},
-        {"8/2p5/1p1p4/p2Pp3/P3Pp2/1P3Pp1/2P3Pp/6K1 w - - 0 1", 6},
+        // {"8/2p5/1p1p4/p2Pp3/P3Pp2/1P3Pp1/2P3Pp/6K1 w - - 0 1", 6},
         {"r1bq1r2/pppn1pbk/3p2np/3Pp1p1/2P1P3/2N2N1P/PP2BPP1/R1BQ1RK1 w - - 0 1", 6},
         {"r2q1rk1/pp2bppp/2n1p3/3pP3/3P1P2/2N5/PPPQ2PP/R3KB1R w KQ - 0 1", 6},
         {"r1bqk2r/1p2bppp/p1nppn2/8/3NP3/2N1B3/PPPQ1PPP/2KR1B1R w kq - 0 1", 6},

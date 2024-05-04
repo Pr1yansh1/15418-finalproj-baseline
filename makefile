@@ -4,8 +4,12 @@
 
 CXX = g++
 # CXXFLAGS = -std=c++17 -Wall -pipe $(EXTRACXXFLAGS) -I/opt/homebrew/opt/libomp/include -Xclang -fopenmp
-CXXFLAGS = -std=c++17 -Wall -pipe $(EXTRACXXFLAGS) -I/opt/homebrew/opt/libomp/include -Xclang
-LDFLAGS = -pthread $(CXXFLAGS) $(EXTRALDFLAGS) -L/opt/homebrew/opt/libomp/lib -lomp
+# CXXFLAGS = -std=c++17 -Wall -pipe $(EXTRACXXFLAGS) -I/opt/homebrew/opt/libomp/include -Xclang
+CXXFLAGS = -std=c++17 -Wall -pipe $(EXTRACXXFLAGS) -I/opt/homebrew/opt/libomp/include -fopenmp
+
+# LDFLAGS = -pthread $(CXXFLAGS) $(EXTRALDFLAGS) -L/opt/homebrew/opt/libomp/lib -lomp
+LDFLAGS = -pthread $(CXXFLAGS) $(EXTRALDFLAGS)
+
 
 OBJS = main.o search.o evaluation.o
 TEST_OBJS = timing-tests.o search.o evaluation.o
@@ -28,6 +32,13 @@ $(EXE): $(OBJS)
 
 $(TEST_EXE): $(TEST_OBJS)
 	$(CXX) -o $@ $(TEST_OBJS) $(LDFLAGS)
+
+
+# $(EXE): $(OBJS)
+# 	$(CXX) -o $@ $(OBJS)
+
+# $(TEST_EXE): $(TEST_OBJS)
+# 	$(CXX) -o $@ $(TEST_OBJS)
 
 install:
 	-cp $(EXE) $(BINDIR)
