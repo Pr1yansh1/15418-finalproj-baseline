@@ -110,7 +110,7 @@ class SearchGlobals {
 
 int qsearch(libchess::Position&);
 SearchResult search(libchess::Position&, int depth);
-std::optional<libchess::Move> best_move_search(libchess::Position&, SearchGlobals& search_globals);
+std::optional<libchess::Move> best_move_search(libchess::Position&, SearchGlobals& search_globals, int max_depth);
 
 } // namespace search
 

@@ -251,19 +251,28 @@ SearchResult search(Position& pos, int depth) {
     auto search_globals = SearchGlobals::new_search_globals();
     int alpha = -INFINITE;
     int beta = +INFINITE;
+    auto start = std::chrono::high_resolution_clock::now();
     SearchResult search_result =
         search_impl(pos, alpha, beta, depth, search_stack.begin(), search_globals);
+    auto end = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
+
+    std::uint64_t nodes = search_globals.nodes();
+    std::uint64_t nps = duration ? nodes * 1000 / duration : nodes;
+    std::cout << "Duration: " << duration << " ms" << std::endl;
+    std::cout << "nodes: " << nodes << std::endl;
+    std::cout << "nps: " << nps << std::endl;
     return search_result;
 }
 
-std::optional<Move> best_move_search(Position& pos, SearchGlobals& search_globals) {
+std::optional<Move> best_move_search(Position& pos, SearchGlobals& search_globals, int max_depth = MAX_PLY) {
     std::optional<Move> best_move;
     auto start_time = curr_time();
     search_globals.set_stop_flag(false);
     search_globals.set_side_to_move(pos.side_to_move());
     search_globals.reset_nodes();
     search_globals.set_start_time(start_time);
-    for (int depth = 1; depth <= MAX_PLY; ++depth) {
+    for (int depth = 1; depth <= max_depth; ++depth) {
         auto search_result = search(pos, search_globals, depth);
 
         if (depth > 1 && search_globals.stop()) {
