@@ -17,6 +17,9 @@ static inline std::chrono::milliseconds curr_time() {
 }
 
 struct SearchResult {
+
+    SearchResult() : score(INFINITE), pv(std::nullopt) {}
+
     SearchResult(int score_, std::optional<libchess::MoveList> pv_) noexcept
         : score(score_), pv(std::move(pv_)) {}
 
@@ -24,6 +27,13 @@ struct SearchResult {
 
     int score;
     std::optional<libchess::MoveList> pv;
+
+    void merge(const SearchResult& other) {
+        if (other.score < score) {
+            score = other.score;
+            pv = other.pv;
+        }
+    }
 };
 
 class SearchGlobals {

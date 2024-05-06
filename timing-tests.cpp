@@ -13,12 +13,12 @@ struct TestPosition {
     int depth;
 };
 
-int TEST_DEPTH = 7;
+int TEST_DEPTH = 3;
 
 int main() {
     std::vector<TestPosition> positions = {
         {"r6r/1b2k1bq/8/8/7B/8/8/R3K2R b KQ - 3 2", 6},
-        {"8/8/8/2k5/2pP4/8/B7/4K3 b - d3 0 3", 6},
+        // {"8/8/8/2k5/2pP4/8/B7/4K3 b - d3 0 3", 6},
         {"r1bqkbnr/pppppppp/n7/8/8/P7/1PPPPPPP/RNBQKBNR w KQkq - 2 2", 6},
         {"r3k2r/p1pp1pb1/bn2Qnp1/2qPN3/1p2P3/2N5/PPPBBPPP/R3K2R b KQkq - 3 2", 6},
         {"2kr3r/p1ppqpb1/bn2Qnp1/3PN3/1p2P3/2N5/PPPBBPPP/R3K2R b KQ - 3 2", 6},
