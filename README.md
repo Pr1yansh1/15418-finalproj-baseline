@@ -1,12 +1,9 @@
 # LibchessEngine
 A UCI compatible chess engine made using libchess. This is not meant to be tested for ELO, it is essentially a testbed for libchess development.
 
+Shared hash table approach is in search-sht.cpp
 
-Baseline sequential implementation: 
-
-main.cpp: 
-evaluution.cp: 
-search.cpp: 
+Root splitting approach is in search-rs.cpp
 
 
 search optimisations that are commented out; 
