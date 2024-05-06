@@ -3,7 +3,7 @@
 #include "evaluation.h"
 #include "search.h"
 
-// #include "tt.h" // Commenting out TT
+#include "tt.h" // Commenting out TT
 
 using namespace libchess;
 using namespace eval;
@@ -35,7 +35,7 @@ void sort_moves(const Position& pos, MoveList& move_list, SearchStack* ss,
         int equality_bound = pawn_value - 50;
         if (tt_move && move == *tt_move) {
             // Commenting out TT move ordering
-            // return 20000;
+            return 20000;
         } else if (move.type() == Move::Type::ENPASSANT) {
             return 10000 + pawn_value + 20;
         } else if (to_pt) {
@@ -147,21 +147,21 @@ SearchResult search_impl(Position& pos, int alpha, int beta, int depth, SearchSt
     bool pv_node = alpha != beta - 1;
 
     // Commenting out Transposition Table handling
-    // auto hash = pos.hash();
-    // TTEntry tt_entry = tt.probe(hash);
-    // Move tt_move{0};
-    // if (tt_entry.get_key() == hash) {
-    //     tt_move = Move{tt_entry.get_move()};
-    //     int tt_score = tt_entry.get_score();
-    //     int tt_flag = tt_entry.get_flag();
-    //     if (!pv_node && tt_entry.get_depth() >= depth) {
-    //         if (tt_flag == TTConstants::FLAG_EXACT ||
-    //             (tt_flag == TTConstants::FLAG_LOWER && tt_score >= beta) ||
-    //             (tt_flag == TTConstants::FLAG_UPPER && tt_score <= alpha)) {
-    //             return {tt_score, {}};
-    //         }
-    //     }
-    // }
+    auto hash = pos.hash();
+    TTEntry tt_entry = tt.probe(hash);
+    Move tt_move{0};
+    if (tt_entry.get_key() == hash) {
+        tt_move = Move{tt_entry.get_move()};
+        int tt_score = tt_entry.get_score();
+        int tt_flag = tt_entry.get_flag();
+        if (!pv_node && tt_entry.get_depth() >= depth) {
+            if (tt_flag == TTConstants::FLAG_EXACT ||
+                (tt_flag == TTConstants::FLAG_LOWER && tt_score >= beta) ||
+                (tt_flag == TTConstants::FLAG_UPPER && tt_score <= alpha)) {
+                return {tt_score, {}};
+            }
+        }
+    }
 
     // Commenting out Null Move Pruning
     // if (!pv_node &&
@@ -184,8 +184,8 @@ SearchResult search_impl(Position& pos, int alpha, int beta, int depth, SearchSt
         return {pos.in_check() ? -MATE_SCORE + ss->ply : 0, {}};
     }
 
-    // sort_moves(pos, move_list, ss, tt_move); // Passing null instead of tt_move
-    sort_moves(pos, move_list, ss);
+    sort_moves(pos, move_list, ss, tt_move); // Passing null instead of tt_move
+    //sort_moves(pos, move_list, ss);
 
     int move_num = 0;
     for (auto move : move_list) {
@@ -225,9 +225,9 @@ SearchResult search_impl(Position& pos, int alpha, int beta, int depth, SearchSt
     }
 
     // Commenting out Transposition Table writing
-    // int tt_flag = best_score >= beta ? TTConstants::FLAG_LOWER
-    //                                  : best_score < alpha ? TTConstants::FLAG_UPPER : FLAG_EXACT;
-    // tt.write(pv.begin()->value(), tt_flag, depth, best_score, hash);
+    int tt_flag = best_score >= beta ? TTConstants::FLAG_LOWER
+                                     : best_score < alpha ? TTConstants::FLAG_UPPER : FLAG_EXACT;
+    tt.write(pv.begin()->value(), tt_flag, depth, best_score, hash);
     return {best_score, pv};
 }
 
@@ -246,7 +246,7 @@ SearchResult search(Position& pos, SearchGlobals& sg, int depth) {
 }
 
 SearchResult search(Position& pos, int depth) {
-    // tt.clear(); // Commenting out TT clear
+    tt.clear(); // Commenting out TT clear
     auto search_stack = SearchStack::new_search_stack();
     auto search_globals = SearchGlobals::new_search_globals();
     int alpha = -INFINITE;
